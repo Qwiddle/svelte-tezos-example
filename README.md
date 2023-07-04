@@ -1,22 +1,20 @@
-# create-svelte
+# svelte-tezos-example
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+An example SvelteKit app that uses the [`svelte-tezos`](https://github.com/Qwiddle/svelte-tezos) library to interact with the Tezos blockchain. Feel free to clone and modify this project as needed. More examples and more advanced features are planned and will be coming _soon_.
 
-## Creating a project
+![image](https://github.com/Qwiddle/svelte-tezos-example/assets/24196928/a2654413-acc2-4afc-b28e-3130486f11cd)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installation
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+1. `git clone https://github.com/Qwiddle/svelte-tezos.git`
+2. `cd svelte-tezos`
+3. `npm install`
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Now follow the instructions below to open a hot-reloadable dev server or to build and bundle your app for production.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've cloned the project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
