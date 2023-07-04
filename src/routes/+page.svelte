@@ -16,9 +16,16 @@
 			dappName: 'svelte-tezos-test', 
 			networkType: "mainnet" as NetworkType,
 		});
-
-		await connect();
 	});
+
+	const handleWalletButtonClick = async () => {
+		if($connected) {
+			await disconnect();
+		}
+		else {
+			await connect();
+		}
+	}
 
 	let blocks: Array<typeof $blockHead> = [];
 
@@ -29,15 +36,13 @@
 <div style="display: flex; align-items: center;">
 	<p>{$connected} - {$userAddress}</p>
 
-	{#if $connected}
-		<button on:click={disconnect}>
+	<button on:click={handleWalletButtonClick}>
+		{#if $connected}
 			Disconnect
-		</button>
-	{:else}
-		<button on:click={connect}>
+		{:else}
 			Connect
-		</button>
-	{/if}
+		{/if}
+	</button>
 </div>
 
 <h1>Latest blocks from the Tezos blockchain</h1>
