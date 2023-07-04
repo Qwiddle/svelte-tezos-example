@@ -9,6 +9,8 @@
 		disconnect
 	} from "svelte-tezos";
 	import type { NetworkType } from "@airgap/beacon-sdk";
+	import BlockTable from "$components/BlockTable.svelte";
+	import Button from "$components/ui/button/Button.svelte";
 
 	onMount(async () => {
 		createStore({ 
@@ -30,28 +32,25 @@
 	let blocks: Array<typeof $blockHead> = [];
 
 	$: console.log({ blocks, $blockHead });
-	$: if($blockHead) blocks = [...blocks, $blockHead];
+	$: if($blockHead) blocks = [$blockHead, ...blocks].slice(0, 10);
 </script>
 
-<div style="display: flex; align-items: center;">
-	<p>{$connected} - {$userAddress}</p>
-
-	<button on:click={handleWalletButtonClick}>
-		{#if $connected}
-			Disconnect
-		{:else}
-			Connect
-		{/if}
-	</button>
-</div>
-
-<h1>Latest blocks from the Tezos blockchain</h1>
-
-{#each blocks as block}
-	{#if block}
-		<div>
-			<h2>Block {block.level}</h2>
-			<p>Timestamp: {block.lastUpdate}</p>
+<div class="grid grid-cols-1">
+	<div class="flex items-center justify-between bg-secondary border-b-2 py-2 px-3">
+		<span class="text-md font-medium">svelte-tezos-example</span>
+		<div class="flex items-center gap-4">
+			{#if $userAddress}
+				<p class="text-xs truncate ... md:w-auto w-12">{$userAddress}</p>
+			{/if}
+			<Button class="bg-primary/10" on:click={handleWalletButtonClick} variant="outline">
+				{#if $connected}
+					Disconnect
+				{:else}
+					Connect
+				{/if}
+			</Button>
 		</div>
-	{/if}
-{/each}
+	</div>
+
+	<BlockTable blocks={blocks} />
+</div>
