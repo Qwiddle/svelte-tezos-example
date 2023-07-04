@@ -38,7 +38,7 @@
 		"class-variance-authority": "^0.6.1",
 		"clsx": "^1.2.1",
 		"lucide-svelte": "^0.258.0",
-		"svelte-tezos": "^1.0.0",
+		"svelte-tezos": "^1.0.2-1",
 		"tailwind-merge": "^1.13.2",
 		"tailwindcss-animate": "^1.0.6",
 		"vite-compatible-readable-stream": "^3.6.1"

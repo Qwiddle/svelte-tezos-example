@@ -3,14 +3,12 @@
 	import {
 		createStore, 
 		userAddress, 
-		connected, 
-		blockHead,
-		connect,
-		disconnect
+		Tezos,
 	} from "svelte-tezos";
 	import type { NetworkType } from "@airgap/beacon-sdk";
+	import { blocks, updateBlocks } from '$lib/stores/blocks';
 	import BlockTable from "$components/BlockTable.svelte";
-	import Button from "$components/ui/button/Button.svelte";
+	import ConnectButton from "$components/ConnectButton.svelte";
 
 	onMount(async () => {
 		createStore({ 
@@ -18,21 +16,18 @@
 			dappName: 'svelte-tezos-test', 
 			networkType: "mainnet" as NetworkType,
 		});
+
+		const sub = Tezos.stream.subscribeBlock('head');
+
+		sub.on('data', (event) => {
+			updateBlocks({
+				level: event.header.level,
+				lastUpdate: event.header.timestamp.toString(),
+				operations: event.operations[3].length,
+				hash: event.hash,
+			})
+		});
 	});
-
-	const handleWalletButtonClick = async () => {
-		if($connected) {
-			await disconnect();
-		}
-		else {
-			await connect();
-		}
-	}
-
-	let blocks: Array<typeof $blockHead> = [];
-
-	$: console.log({ blocks, $blockHead });
-	$: if($blockHead) blocks = [$blockHead, ...blocks].slice(0, 10);
 </script>
 
 <div class="grid grid-cols-1">
@@ -42,15 +37,9 @@
 			{#if $userAddress}
 				<p class="text-xs truncate ... md:w-auto w-12">{$userAddress}</p>
 			{/if}
-			<Button class="bg-primary/10" on:click={handleWalletButtonClick} variant="outline">
-				{#if $connected}
-					Disconnect
-				{:else}
-					Connect
-				{/if}
-			</Button>
+			<ConnectButton />
 		</div>
 	</div>
 
-	<BlockTable blocks={blocks} />
+	<BlockTable blocks={$blocks} />
 </div>
