@@ -6,7 +6,7 @@ An example SvelteKit app that uses the [`svelte-tezos`](https://github.com/Qwidd
 
 ## Installation
 
-1. `git clone https://github.com/Qwiddle/svelte-tezos.git`
+1. `git clone https://github.com/Qwiddle/svelte-tezos-example.git`
 2. `cd svelte-tezos`
 3. `npm install`
 
