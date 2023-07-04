@@ -14,9 +14,9 @@
 
 <Button class="bg-primary/10" on:click={handleWalletButtonClick} variant="outline">
   {#if $connected}
-  Disconnect
+    Disconnect
   {:else}
-  Connect
+    Connect
   {/if}
 </Button>
 

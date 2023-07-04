@@ -11,6 +11,6 @@ export const blocks: Writable<Block[]> = writable([]);
 
 export const updateBlocks = (block: Block) => {
   blocks.update((b) => 
-  [block, ...b].slice(0, 10)
+    [block, ...b].slice(0, 10)
   );
 }
